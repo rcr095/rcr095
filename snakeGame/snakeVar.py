@@ -132,21 +132,44 @@ class Snake():
         self.play()
 
     def up(self, event):
-        if self.direction != 'down':
+        if self.direction != 'down' and self.checkBody0('up') == 0:
             self.direction = 'up'
+            
 
     def down(self, event):
-        if self.direction != 'up':
-            self.direction = 'down'
-            
+        if self.direction != 'up' and self.checkBody0('down') == 0:
+            self.direction = 'down'        
+
     def right(self, event):
-        if self.direction != 'left':
+        if self.direction != 'left' and self.checkBody0('right') == 0:
             self.direction = 'right'
 
     def left(self, event):
-        if self.direction != 'right':
+        if self.direction != 'right' and self.checkBody0('left') == 0:
             self.direction = 'left'
 
+    def checkBody0(self, direction):
+        x1,y1,x2,y2 = self.frame.coords(self.bodyList[0])
+        hx1,hy1,hx2,hy2 = self.frame.coords(self.head)
+        if direction == 'up':
+            if hy1 - 20 == y1:
+                return 1
+            return 0
+            
+        elif direction == 'down':
+            if hy2 + 20 == y2:
+                return 1
+            return 0
+            
+        elif direction == 'right':
+            if hx2 + 20 == x2:
+                return 1
+            return 0
+            
+        elif direction == 'left':
+            if hx1 - 20 == x1:
+                return 1
+            return 0
     def control(self):
         self.frame.bind('<Up>', self.up)
         self.frame.bind('<Down>', self.down)
