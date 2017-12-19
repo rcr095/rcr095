@@ -1,5 +1,5 @@
 import time, tkinter, random
-
+from tkinter import font
 class Snake():
 
     def __init__(self, width, height):
@@ -16,6 +16,7 @@ class Snake():
 
     def start(self):
         self.window = tkinter.Tk()
+        self.window.title('Snake by rcr095')
         self.style = tkinter.font.Font(size = 20, weight = 'bold')
         self.frame = tkinter.Canvas(self.window, width = self.width,
                                     height = self.height, bg = 'white')
@@ -149,27 +150,31 @@ class Snake():
             self.direction = 'left'
 
     def checkBody0(self, direction):
-        x1,y1,x2,y2 = self.frame.coords(self.bodyList[0])
-        hx1,hy1,hx2,hy2 = self.frame.coords(self.head)
-        if direction == 'up':
-            if hy1 - 20 == y1:
-                return 1
+        try:
+            x1,y1,x2,y2 = self.frame.coords(self.bodyList[0])
+            hx1,hy1,hx2,hy2 = self.frame.coords(self.head)
+            if direction == 'up':
+                if hy1 - 20 == y1:
+                    return 1
+                return 0
+                
+            elif direction == 'down':
+                if hy2 + 20 == y2:
+                    return 1
+                return 0
+                
+            elif direction == 'right':
+                if hx2 + 20 == x2:
+                    return 1
+                return 0
+                
+            elif direction == 'left':
+                if hx1 - 20 == x1:
+                    return 1
+                return 0
+        except IndexError:
             return 0
-            
-        elif direction == 'down':
-            if hy2 + 20 == y2:
-                return 1
-            return 0
-            
-        elif direction == 'right':
-            if hx2 + 20 == x2:
-                return 1
-            return 0
-            
-        elif direction == 'left':
-            if hx1 - 20 == x1:
-                return 1
-            return 0
+        
     def control(self):
         self.frame.bind('<Up>', self.up)
         self.frame.bind('<Down>', self.down)
@@ -193,17 +198,18 @@ class Snake():
             self.possY.append(y)
 
     def play(self):
-        while self.state == 'on':
-            self.window.update()
-            self.move()
-            time.sleep(self.vel)
-            self.foodTime += 1
-            if self.foodTime > 20:
-                self.newFood(random.choice(self.possX), random.choice(self.possY))
-                self.foodTime = 0
-            self.frame.update()
-            self.killCheck()
-
+        try:
+            while self.state == 'on':
+                self.move()
+                time.sleep(self.vel)
+                self.foodTime += 1
+                if self.foodTime > 20:
+                    self.newFood(random.choice(self.possX), random.choice(self.possY))
+                    self.foodTime = 0
+                self.frame.update()
+                self.killCheck()
+        except:
+            return 0
     def killCheck(self):
         x1, y1, x2, y2 = self.frame.coords(self.head)
         for id in self.frame.find_overlapping(x1 + 8, y1 + 8, x2 - 8, y2 - 8):
@@ -211,7 +217,6 @@ class Snake():
             if color == 'black':
                 self.kill()
             elif color == 'red':
-                x1, y1, x2, y2 = self.frame.coords(self.bodyList[len(self.bodyList) - 1])
                 self.body()
                 x1, y1, x2, y2 = self.frame.coords(self.head)
                 nameX = str(int(x1)) + str(int(y1))
@@ -237,10 +242,9 @@ class Snake():
 
     def restartGame(self):
         self.restartBt.destroy()
-        self.window.destroy()
         self.foodTime = 0
-        self.start()
         self.size = 0
+        self.head = self.frame.create_rectangle(40, 60, 60, 80, fill = 'yellow', outline = 'blue')
         self.bodyList = []
         self.frame.update()
         self.startGameC()
@@ -259,6 +263,12 @@ class Snake():
         self.play()
 
 
-Snake(500,500)
+def playSnake(width, height):
+    game = Snake(width, height)
+    game.window.mainloop()
 
+playSnake(500,500)
+
+
+    
         
