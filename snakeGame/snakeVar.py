@@ -90,32 +90,33 @@ class Snake():
         self.foodCount = 1
         self.foodDic = {nameX:self.food1}
 
-    def newFood(self, x, y):
-        
-        if self.foodCount == 0:
-            nameX = str(int(x)) + str(int(y))
-            self.food1 = self.frame.create_rectangle(x + 2, y + 2, x + 18, y + 18,
-                                                 fill = 'red')
-            self.foodCount += 1
-            self.foodDic[nameX] = self.food1
+    def newFood(self):
+        x = random.choice(self.possX)
+        y = random.choice(self.possY)
+        overlap = self.frame.find_overlapping(x + 8, y + 8, x + 12, y + 12)
+        if len(overlap) == 0:
+            if self.foodCount == 0:
+                nameX = str(int(x)) + str(int(y))
+                self.food1 = self.frame.create_rectangle(x + 2, y + 2, x + 18, y + 18,
+                                                     fill = 'red')
+                self.foodCount += 1
+                self.foodDic[nameX] = self.food1
 
-        elif self.foodCount == 1:
-            nameX = str(int(x)) + str(int(y))
-            self.food2 = self.frame.create_rectangle(x + 2, y + 2, x + 18, y + 18,
-                                                 fill = 'red')
-            self.foodCount += 1
-            self.foodDic[nameX] = self.food2
+            elif self.foodCount == 1:
+                nameX = str(int(x)) + str(int(y))
+                self.food2 = self.frame.create_rectangle(x + 2, y + 2, x + 18, y + 18,
+                                                     fill = 'red')
+                self.foodCount += 1
+                self.foodDic[nameX] = self.food2
 
-        elif self.foodCount == 2:
-            nameX = str(int(x)) + str(int(y))
-            self.food3 = self.frame.create_rectangle(x + 2, y + 2, x + 18, y + 18,
-                                                 fill = 'red')
-            self.foodCount += 1
-            self.foodDic[nameX] = self.food3
-
-    def eaten(self, eaten):
-        self.frame.delete(eaten)
-        self.foodCount -= 1
+            elif self.foodCount == 2:
+                nameX = str(int(x)) + str(int(y))
+                self.food3 = self.frame.create_rectangle(x + 2, y + 2, x + 18, y + 18,
+                                                     fill = 'red')
+                self.foodCount += 1
+                self.foodDic[nameX] = self.food3
+        else:
+            self.newFood()
 
     def startGameC(self):
         self.state = 'on'
@@ -204,7 +205,7 @@ class Snake():
                 time.sleep(self.vel)
                 self.foodTime += 1
                 if self.foodTime > 20:
-                    self.newFood(random.choice(self.possX), random.choice(self.possY))
+                    self.newFood()
                     self.foodTime = 0
                 self.frame.update()
                 self.killCheck()
@@ -213,26 +214,26 @@ class Snake():
     def killCheck(self):
         x1, y1, x2, y2 = self.frame.coords(self.head)
         for id in self.frame.find_overlapping(x1 + 8, y1 + 8, x2 - 8, y2 - 8):
-            color = self.frame.itemcget(id, 'fill') 
+            color = self.frame.itemcget(id, 'fill')
             if color == 'black':
                 self.kill()
             elif color == 'red':
-                self.body()
                 x1, y1, x2, y2 = self.frame.coords(self.head)
                 nameX = str(int(x1)) + str(int(y1))
-                self.eaten(self.foodDic[nameX])
+                self.frame.delete(self.foodDic[nameX])
+                self.foodCount -= 1
+                self.body()
                 if self.vel > 0.04:
                     self.vel -= 0.0001
 
     def kill(self):
-        self.game('<Return>')
         self.frame.delete(self.head)
         for entry in self.bodyList:
             self.frame.delete(entry)
         self.bodyList = []
         self.size = 0
         for key in self.foodDic:
-            self.eaten(self.foodDic[key])
+            self.frame.delete(self.foodDic[key])
         self.restartBt = tkinter.Button(self.frame, text = 'Gameover \n Press to Play',
                          bg = 'white', command = self.restartGame,
                          font = self.style)
@@ -249,6 +250,7 @@ class Snake():
         self.frame.update()
         self.startGameC()
         self.body()
+        self.body()
         self.move()
         self.startGameC()
         self.startFoodC(random.choice(self.possX), random.choice(self.possY))
@@ -256,6 +258,7 @@ class Snake():
 
     def startGame(self):
         self.startBt.destroy()
+        self.body()
         self.body()
         self.move()
         self.startGameC()
