@@ -1,3 +1,8 @@
+'''
+A connected undirected graph G = (V, E) is given by its cost matrix, where all costs are positive,
+and ≤ 65534. Determine a simple cycle passing through all nodes (a Hamiltonian cycle) of
+minimal cost.
+'''
 class Vertex:#vertex class
     '''
     Title: 210_Q11Week7Adv1

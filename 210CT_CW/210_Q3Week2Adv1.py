@@ -1,3 +1,5 @@
+'''Solves the 8 Queens Problem. Can be used for N Queens.'''
+
 import numpy as np
 
 def checkMove(row, column, solution):#validates a position for a new queen

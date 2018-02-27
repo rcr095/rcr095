@@ -1,3 +1,8 @@
+'''
+Read a paragraph containing words from an input file. Then create a doubly-linked list
+containing the distinct words read, where the words of the same length are placed in the same
+list, in alphabetical order.
+'''
 import string
 
 class Node(object):
@@ -114,7 +119,7 @@ def linkedSort(file):
         j.displayF()
         
 if __name__ == '__main__':
-    linkedSort('input.txt')
+    linkedSort('Q9Input.txt')
 
 
 

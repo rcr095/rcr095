@@ -1,3 +1,10 @@
+'''
+Convert A into B as cheaply as possible. The rules are as follows:
+• For a cost of 3 you can delete any letter.
+• For a cost of 4 you can insert a letter in any position.
+• For a cost of 5 you can replace any letter by any other letter.
+'''
+
 import unittest
 
 def check(a, b):#check if string equality

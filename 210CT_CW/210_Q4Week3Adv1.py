@@ -1,3 +1,5 @@
+'''Creates a tower of cubes with ascending order.'''
+
 def checkDupl(cubes):
     '''
     Removes a cube of colour 'X' and size 'Z' in case: x - y >= 2

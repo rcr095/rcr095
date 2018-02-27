@@ -1,3 +1,7 @@
+'''
+Find the smallest sum of n integer numbers taken from different diagonals parallel with the
+main diagonal, and including the main diagonal of a matrix A of size n × n.
+'''
 import numpy as np
 from random import randint
 

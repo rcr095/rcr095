@@ -1,3 +1,5 @@
+''' Checks if m divides by n!'''
+
 import unittest
 
 def factorial(n): #Return the factorial n    

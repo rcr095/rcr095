@@ -1,3 +1,8 @@
+'''
+A lorry can carry at most n kilograms. The name of the materials, the amount of material in
+kilograms and the material price per kilo are known. Compute a load composition in such a way
+that the value (price) of the load is maximum.
+'''
 import unittest
 
 '''

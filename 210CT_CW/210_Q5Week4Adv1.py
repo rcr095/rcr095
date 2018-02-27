@@ -1,3 +1,9 @@
+'''Consider a nxm matrix, with numbers between 1 and 9, representing colours.
+A connected set associated to an element is the set of elements that
+may be reached from this element, by successive moves on a same row or column preserving
+the same colour. It is to determine the size and the colour of the biggest connected set.
+'''
+
 import numpy as np
 from random import randint
 

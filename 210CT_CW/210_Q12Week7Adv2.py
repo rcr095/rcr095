@@ -1,3 +1,7 @@
+'''
+Implement the structure for a weighted, directed graph G, where nodes consist of positive
+integers, then implement an algorithm to find the longest simple path.
+'''
 class Vertex:#vertex class
     '''
     Title: 210_Q11Week7Adv1

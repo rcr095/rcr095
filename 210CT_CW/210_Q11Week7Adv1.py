@@ -1,3 +1,8 @@
+'''
+For an undirected graph G = (V, E), where node names are positive integers, implement a graph
+construction method, and a function named isConnected to check whether or not the graph is
+connected. 
+'''
 class Vertex:#vertex class
     def __init__(self, vertex):
         self.vertexName = vertex

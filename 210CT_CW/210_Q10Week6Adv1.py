@@ -1,3 +1,13 @@
+'''
+Create a tree to store information and implement the following operations:
+• Find a student by his/hers unique code, and support updating of the student info if found.
+• List students by class in lexicographic order of their names.
+• List all students in lexicographic order of their names.
+• List all graduated students.
+• List all undergrads by their class in lexicographic order of their names.
+• Delete a student given by its code.
+• Delete all graduates.
+'''
 class Student:
     def __init__(self, uniqueCode, name, birthDate, address, classID, enrolmentDate, status):
         self.uniqueCode = uniqueCode

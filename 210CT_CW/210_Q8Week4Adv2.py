@@ -1,3 +1,5 @@
+'''Adapt the quick sort algorithm to find the mth smallest element out of a sequence of n
+integers.'''
 import unittest
 
 def quickSort(m, listA): #uses quicksort to return the mth element
