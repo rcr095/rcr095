@@ -1,2 +1,0 @@
-Stable sort algorithms sort identical elements in the same order that they appear in the input.
-When sorting some kinds of data, only part of the data is examined when determining the sort order.
